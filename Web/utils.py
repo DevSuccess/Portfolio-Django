@@ -15,10 +15,11 @@ DAYS = (
 )
 
 SOCIALS = (
-    ('fab fa-linkedin-in', 'LinkedIn'),
-    ('fab fa-twitter', 'Twitter'),
-    ('fab fa-facebook-f', 'Facebook'),
-    ('fab fa-instagram', 'Instagram'),
+    ('bx bxl-facebook', 'facebook'),
+    ('bx bxl-instagram', 'instagram'),
+    ('bx bxl-linkedin', 'linkedin'),
+    ('bx bxl-skype', 'google-plus'),  # SKYPE
+    ('bx bxl-twitter', 'twitter'),
 )
 
 STATES = sorted([

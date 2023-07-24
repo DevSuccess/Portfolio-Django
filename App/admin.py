@@ -75,8 +75,6 @@ class ProfileAdmin(admin.ModelAdmin):
         }),
         ('Socials and Web', {
             'fields': ('socials', 'webs')
-        }),
+        })
     )
     readonly_fields = ('admin_photo', 'created_at', 'updated_at')
-
-
