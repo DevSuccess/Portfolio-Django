@@ -21,17 +21,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG') == 'True'
+DEBUG = os.getenv('DJANGO_DEBUG', True)
 
 if DEBUG:
+    print('DEBUG')
     ALLOWED_HOSTS = ['*', os.getenv('ALLOWED_HOSTS')]
+    SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure--ndfi$yt+hfh!*r&wb+oqqoxz*khyln39x0^_s07ry&6&hrzz$')
 else:
     ALLOWED_HOSTS = ['*', os.getenv('ALLOWED_HOSTS')]
     SECURE_SSL_HOST = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    SECRET_KEY = os.getenv('SECRET_KEY')
 
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
