@@ -1,0 +1,27 @@
+# Django-related files and folders
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Static and media files
+staticfiles/
+media/
+
+# Django migrations
+**/migrations/*
+
+# Environment variables
+.env
+local_env
+
+# Editor and IDE files
+.idea/
+*.iml
+*.swp
+
+# Compiled Python files
+
+# System and temporary files
+.DS_Store
+Thumbs.db
