@@ -21,11 +21,18 @@ class Localisation(models.Model):
         return f"{self.lot} {self.city} {self.state}"
 
 
-class Contact(models.Model):
-    number = models.CharField(max_length=15)
+class Contact(BaseModel):
+    TYPE = (
+        ('Contact', 'Contact'),
+        ('Client', 'Client'),
+        ('Info', 'Info'),
+        ('Personal', 'Personal'),
+    )
+    value = models.CharField(max_length=15)
+    type = models.CharField(default='Client', max_length=50, choices=TYPE)
 
     def __str__(self):
-        return self.number
+        return self.value
 
 
 class Degree(BaseModel):
@@ -71,7 +78,7 @@ class Web(BaseModel):
         return self.title
 
 
-class Social(models.Model):
+class Social(BaseModel):
     title = models.CharField(max_length=150)
     type = models.CharField(max_length=25, choices=SOCIALS)
     url = models.URLField()
@@ -89,15 +96,16 @@ class About(ImageModel):
         return self.title
 
 
-class Profile(ImageModel):
+class Profile(BaseModel, ImageModel):
     firstname = models.CharField(max_length=150)
     lastname = models.CharField(max_length=150)
     pseudo = models.CharField(max_length=50)
     birthday = models.DateField()
-    degrees = models.ManyToManyField(Degree)
-    contacts = models.ManyToManyField(Contact)
-    emails = models.ManyToManyField(Email)
-    webs = models.ManyToManyField(Web)
+    degrees = models.ManyToManyField(Degree, blank=True)
+    contacts = models.ManyToManyField(Contact, blank=True)
+    emails = models.ManyToManyField(Email, blank=True)
+    socials = models.ManyToManyField(Social, blank=True)
+    webs = models.ManyToManyField(Web, blank=True)
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
