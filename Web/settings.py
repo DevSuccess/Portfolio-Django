@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG')
+DEBUG = os.getenv('DJANGO_DEBUG') == 'True'
 
 if DEBUG:
     ALLOWED_HOSTS = ['*', os.getenv('ALLOWED_HOSTS')]
@@ -82,14 +82,14 @@ WSGI_APPLICATION = 'Web.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'NAME': os.getenv('DB_NAME', 'django_portfolio'),
+        'USER': os.getenv('DB_USER', 'root'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'AllahSeul@2001'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', 3306),
         'OPTIONS': {
             'autocommit': True,
-            'sql_mode': 'STRICT_TRANS_TABLES'
+            'sql_mode': 'STRICT_TRANS_TABLES',
         },
     }
 }
@@ -125,14 +125,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, os.getenv('STATIC_ROOT'))
+STATIC_ROOT = os.path.join(BASE_DIR, os.getenv('STATIC_ROOT', 'staticfiles'))
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, os.getenv('MEDIA_ROOT'))
+MEDIA_ROOT = os.path.join(BASE_DIR, os.getenv('MEDIA_ROOT', 'media'))
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 )
 
 if django.VERSION >= (4, 2):
