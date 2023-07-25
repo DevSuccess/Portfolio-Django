@@ -133,8 +133,8 @@ Portfolio
                 <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up">
                     <div class="count-box">
                         <i class="bi bi-emoji-smile"></i>
-                        <span data-purecounter-start="0" data-purecounter-end="{{ fact_happy | default_if_none:0 }}" data-purecounter-duration="1"
-                            class="purecounter"></span>
+                        <span data-purecounter-start="0" data-purecounter-end="{{ fact_happy | default_if_none:0 }}"
+                            data-purecounter-duration="1" class="purecounter"></span>
                         <p><strong>Satisfaction Clientel</strong> par rapport au porjet </p>
                     </div>
                 </div>
@@ -142,8 +142,8 @@ Portfolio
                 <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="100">
                     <div class="count-box">
                         <i class="bi bi-journal-richtext"></i>
-                        <span data-purecounter-start="0" data-purecounter-end="{{ fact_project | default_if_none:0 }}" data-purecounter-duration="1"
-                            class="purecounter"></span>
+                        <span data-purecounter-start="0" data-purecounter-end="{{ fact_project | default_if_none:0 }}"
+                            data-purecounter-duration="1" class="purecounter"></span>
                         <p><strong>Projets</strong> realisés</p>
                     </div>
                 </div>
@@ -165,7 +165,29 @@ Portfolio
                         <p><strong>Collaboration</strong> travail avec d'autre développeur</p>
                     </div>
                 </div>
-
+            </div>
+        </div>
+    </section><!-- End Facts Section -->
+    <!-- ======= Skills Section ======= -->
+    <section id="skills" class="skills section-bg">
+        <div class="container">
+            <div class="section-title">
+                <h2>Compétences</h2>
+                <p>{{ skills.libel }}</p>
+            </div>
+            <div class="row skills-content">
+                {% for skill in skills.competences.all %}
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="progress">
+                        <span class="skill"> {{ skill.name }}<i class="val">{{ skill.rate }}%</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ skill.rate }}"
+                                aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </section>

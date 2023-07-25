@@ -54,14 +54,13 @@ class SocialAdmin(admin.ModelAdmin):
 
 @admin.register(models.About)
 class AboutAdmin(admin.ModelAdmin):
-    list_display = ('title', 'introduction', 'admin_photo')
-    fields = ('title', 'introduction', 'description', 'admin_photo')
-    readonly_fields = ('admin_photo',)
+    list_display = ('title', 'introduction')
+    fields = ('title', 'introduction', 'description')
 
 
 @admin.register(models.Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('firstname', 'lastname', 'pseudo', 'birthday',)
+    list_display = ('firstname', 'lastname', 'pseudo', 'birthday', 'admin_photo')
     filter_horizontal = ('degrees', 'contacts', 'emails', 'socials', 'webs')
     fieldsets = (
         ('Personal', {
@@ -78,3 +77,33 @@ class ProfileAdmin(admin.ModelAdmin):
         })
     )
     readonly_fields = ('admin_photo', 'created_at', 'updated_at')
+
+
+@admin.register(models.Facts)
+class FactsAdmin(admin.ModelAdmin):
+    list_display = ('libel', 'created_at', 'updated_at')
+    fields = ('libel', ('created_at', 'updated_at'))
+    readonly_fields = ('created_at', 'updated_at')
+
+
+@admin.register(models.Competence)
+class CompetenceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'rate', 'admin_photo')
+    fields = ('name', 'rate', 'image', 'admin_photo')
+    readonly_fields = ('admin_photo',)
+
+
+@admin.register(models.Skill)
+class SkillAdmin(admin.ModelAdmin):
+    list_display = ('libel', 'created_at', 'updated_at')
+    filter_horizontal = ('competences',)
+    fieldsets = (
+        (None, {
+            'fields': ('libel', 'active')
+        }),
+        ('Competences', {
+            'fields': ('competences', 'created_at', 'updated_at')
+        })
+    )
+    readonly_fields = ('created_at', 'updated_at')
+

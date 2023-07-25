@@ -87,7 +87,7 @@ class Social(BaseModel):
         return self.title
 
 
-class About(ImageModel):
+class About(BaseModel):
     title = models.CharField(max_length=150)
     introduction = models.TextField(max_length=250)
     description = models.TextField()
@@ -110,3 +110,34 @@ class Profile(BaseModel, ImageModel):
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
+
+
+class Facts(BaseModel):
+    libel = models.TextField()
+
+    def __str__(self):
+        return self.libel
+
+
+class Competence(ImageModel):
+    name = models.CharField(max_length=150)
+    rate = models.IntegerField(
+        validators=[
+            MaxValueValidator(100),
+            MinValueValidator(0)
+        ], blank=True,
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['-rate']
+
+
+class Skill(BaseModel):
+    libel = models.TextField()
+    competences = models.ManyToManyField(Competence)
+
+    def __str__(self):
+        return self.libel

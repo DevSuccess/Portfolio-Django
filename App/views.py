@@ -10,6 +10,7 @@ def index(request):
     abouts = models.About.objects.all().first()
     web = models.Web.objects.filter(type__iexact='Portfolio').first()
     contact = models.Contact.objects.filter(type__iexact='Contact').first()
+    skills = models.Skill.objects.all().first()
     context = {
         'abouts': abouts,
         'profiles': profiles,
@@ -17,5 +18,6 @@ def index(request):
         'contact': contact,
         'fact_happy': models.Contact.objects.all().count(),
         'fact_project': models.Web.objects.all().count(),
+        'skills': skills,
     }
     return render(request, 'App/index.html', context)
