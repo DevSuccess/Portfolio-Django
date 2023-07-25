@@ -165,7 +165,7 @@ class Education(models.Model):
         return self.title
 
 
-class Formation (models.Model):
+class Experience (models.Model):
     title = models.CharField(max_length=150)
     begin = models.CharField(max_length=100, null=True, blank=True)
     end = models.CharField(max_length=100, null=True, blank=True)
@@ -185,7 +185,7 @@ class Summary(models.Model):
         return self.title
 
 
-class Resume(models.Model):
+class Resume(BaseModel):
     libel = models.TextField()
 
     def __str__(self):

@@ -160,7 +160,61 @@ Portfolio
                 {% endfor %}
             </div>
         </div>
-    </section>
+    </section><!-- End Skills Section -->
+
+    <!-- ======= Resume Section ======= -->
+    <div id="resume" class="resume">
+        <div class="container">
+            <div class="section-title">
+                <h2>Résumée</h2>
+                <p>{{ resume.libel }}</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-up">
+                    <h3 class="resume-title">Sommaire</h3>
+                    {% for sommary in sommaries %}
+                        <div class="resume-item pb-0">
+                            <h4>{{ sommary.title }}</h4>
+                            <p><em>
+                                {{ sommary.details }}
+                            </em></p>
+                            <ul>
+                                {% for list in sommary.lists.all %}
+                                    <li>{{ list.value }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
+
+                    <h3 class="resume-title">Education</h3>
+                    {% for education in educations %}
+                        <div class="resume-item">
+                            <h4>{{ education.title }}</h4>
+                            <h5>{{ education.begin }} - {{ education.end }}</h5>
+                            <p><em>{{ education.description }}</em></p>
+                            <p>{{ education.details }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="resume-title">Expérience Professionel</h3>
+                {% for experience in experiences %}
+                    <div class="resume-item">
+                        <h4>{{ experience.title }}</h4>
+                        <h5>{{ experience.begin }} {{ experience.end }}</h5>
+                        <p><em>{{ experience.description }}</em></p>
+                        <ul>
+                            {% for exp in experience.lists.all %}
+                                <li>{{ exp.value }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->

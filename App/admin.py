@@ -140,8 +140,8 @@ class EducationAdmin(admin.ModelAdmin):
     fields = ('title', 'begin', 'end', 'description', 'details')
 
 
-@admin.register(models.Formation)
-class SummaryAdmin(admin.ModelAdmin):
+@admin.register(models.Experience)
+class ExperienceAdmin(admin.ModelAdmin):
     list_display = ('title', 'begin', 'end', 'description')
     fields = ('title', 'begin', 'end', 'description', 'lists')
     filter_horizontal = ('lists',)
@@ -149,5 +149,5 @@ class SummaryAdmin(admin.ModelAdmin):
 
 @admin.register(models.Resume)
 class ResumeAdmin(admin.ModelAdmin):
-    list_display = ('libel',)
-    fields = ('libel',)
+    list_display = ('libel', 'active')
+    fields = ('libel', 'active')

@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from . import models
 
@@ -29,6 +28,14 @@ def index(request):
         facts = models.Fact.objects.get(active=True)
     except:
         facts = None
+    try:
+        resume = models.Resume.objects.get(active=True)
+    except:
+        resume = None
+
+    sommaries = models.Summary.objects.all()
+    educations = models.Education.objects.all()
+    experiences = models.Experience.objects.all()
 
     context = {
         'about': about,
@@ -36,5 +43,9 @@ def index(request):
         'contact': contact,
         'facts': facts,
         'skills': skills,
+        'resume': resume,
+        'sommaries': sommaries,
+        'educations': educations,
+        'experiences': experiences,
     }
     return render(request, 'App/index.html', context)
