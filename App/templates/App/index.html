@@ -85,7 +85,8 @@ Portfolio
                                     </span>
                                 </li>
                                 <li><i class="bi bi-chevron-right"></i> <strong>Web:</strong>
-                                    <span>{{ web.url }}</span></li>
+                                    <span>{{ web.url }}</span>
+                                </li>
                                 <li><i class="bi bi-chevron-right"></i> <strong>Téléphone:</strong>
                                     <span>
                                         {{ contact.value }}
@@ -93,7 +94,8 @@ Portfolio
                                 </li>
                                 <li><i class="bi bi-chevron-right"></i> <strong>Adresse:</strong>
                                     <span>
-                                        {{ profiles.localisation.city }} {{ profiles.localisation.street }}, {{ profiles.localisation.state }}
+                                        {{ profiles.localisation.city }} {{ profiles.localisation.street }},
+                                        {{profiles.localisation.state }}
                                     </span>
                                 </li>
                             </ul>
@@ -120,6 +122,53 @@ Portfolio
         </div>
     </section><!-- End About Section -->
 
+    <section id="facts" class="facts">
+        <div class="container">
+            <div class="section-title">
+                <h2>Valeurs</h2>
+                <p></p>
+            </div>
+            <div class="row no-gutters">
+
+                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up">
+                    <div class="count-box">
+                        <i class="bi bi-emoji-smile"></i>
+                        <span data-purecounter-start="0" data-purecounter-end="{{ fact_happy | default_if_none:0 }}" data-purecounter-duration="1"
+                            class="purecounter"></span>
+                        <p><strong>Satisfaction Clientel</strong> par rapport au porjet </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="100">
+                    <div class="count-box">
+                        <i class="bi bi-journal-richtext"></i>
+                        <span data-purecounter-start="0" data-purecounter-end="{{ fact_project | default_if_none:0 }}" data-purecounter-duration="1"
+                            class="purecounter"></span>
+                        <p><strong>Projets</strong> realisés</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="200">
+                    <div class="count-box">
+                        <i class="bi bi-headset"></i>
+                        <span data-purecounter-start="0" data-purecounter-end="2880" data-purecounter-duration="1"
+                            class="purecounter"></span>
+                        <p><strong>Heurs de Support</strong> après livraison</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="300">
+                    <div class="count-box">
+                        <i class="bi bi-people"></i>
+                        <span data-purecounter-start="0" data-purecounter-end="4" data-purecounter-duration="1"
+                            class="purecounter"></span>
+                        <p><strong>Collaboration</strong> travail avec d'autre développeur</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
 
 </main><!-- End #main -->

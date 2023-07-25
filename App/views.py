@@ -1,3 +1,5 @@
+from itertools import count
+
 from django.shortcuts import render
 from . import models
 
@@ -12,6 +14,8 @@ def index(request):
         'abouts': abouts,
         'profiles': profiles,
         'web': web,
-        'contact': contact
+        'contact': contact,
+        'fact_happy': models.Contact.objects.all().count(),
+        'fact_project': models.Web.objects.all().count(),
     }
     return render(request, 'App/index.html', context)
