@@ -65,7 +65,7 @@ class ProfileAdmin(admin.ModelAdmin):
     filter_horizontal = ('degrees', 'contacts', 'emails', 'socials', 'webs')
     fieldsets = (
         ('Personal', {
-            'fields': ('firstname', 'lastname', 'pseudo', 'birthday',)
+            'fields': ('firstname', 'lastname', 'pseudo', 'birthday', 'localisation')
         }),
         (None, {
             'fields': ('image', 'degrees')

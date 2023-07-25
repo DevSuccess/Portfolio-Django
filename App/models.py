@@ -106,6 +106,7 @@ class Profile(BaseModel, ImageModel):
     emails = models.ManyToManyField(Email, blank=True)
     socials = models.ManyToManyField(Social, blank=True)
     webs = models.ManyToManyField(Web, blank=True)
+    localisation = models.ForeignKey(Localisation, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
