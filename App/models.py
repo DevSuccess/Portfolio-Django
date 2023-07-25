@@ -147,35 +147,46 @@ class Skill(BaseModel):
         return self.libel
 
 
-class DetailListResume(models.Model):
+class List(models.Model):
     value = models.CharField(max_length=250)
 
     def __str__(self):
         return self.value
 
 
-class ResumeList(models.Model):
+class Education(models.Model):
     title = models.CharField(max_length=150)
     begin = models.CharField(max_length=100, null=True, blank=True)
     end = models.CharField(max_length=100, null=True, blank=True)
-    libel = models.TextField()
-    details = models.ManyToManyField(DetailListResume)
+    description = models.TextField()
+    details = models.TextField()
 
     def __str__(self):
         return self.title
 
 
-class TitleResume(models.Model):
-    libel = models.CharField(max_length=150)
-    resumes_list = models.ManyToManyField(ResumeList)
+class Formation (models.Model):
+    title = models.CharField(max_length=150)
+    begin = models.CharField(max_length=100, null=True, blank=True)
+    end = models.CharField(max_length=100, null=True, blank=True)
+    description = models.TextField()
+    lists = models.ManyToManyField(List, blank=True)
 
     def __str__(self):
-        return self.libel
+        return self.title
+
+
+class Summary(models.Model):
+    title = models.CharField(max_length=150)
+    details = models.TextField()
+    lists = models.ManyToManyField(List, blank=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Resume(models.Model):
     libel = models.TextField()
-    title_resume = models.ManyToManyField(TitleResume)
 
     def __str__(self):
         return self.libel

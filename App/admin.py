@@ -121,28 +121,33 @@ class SkillAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'updated_at')
 
 
-@admin.register(models.DetailListResume)
-class DetailListResumeAdmin(admin.ModelAdmin):
+@admin.register(models.List)
+class ListAdmin(admin.ModelAdmin):
     list_display = ('value',)
     fields = ('value',)
 
 
-@admin.register(models.TitleResume)
+@admin.register(models.Summary)
 class TitleResumeAdmin(admin.ModelAdmin):
-    list_display = ('libel',)
-    fields = ('libel', 'resumes_list')
-    filter_horizontal = ('resumes_list',)
+    list_display = ('title',)
+    fields = ('title', 'details', 'lists')
+    filter_horizontal = ('lists',)
 
 
-@admin.register(models.ResumeList)
-class ResumeListAdmin(admin.ModelAdmin):
-    list_display = ('title', 'begin', 'end', 'libel')
-    fields = ('title', 'begin', 'end', 'libel', 'details')
-    filter_horizontal = ('details',)
+@admin.register(models.Education)
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ('title', 'begin', 'end',)
+    fields = ('title', 'begin', 'end', 'description', 'details')
+
+
+@admin.register(models.Formation)
+class SummaryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'begin', 'end', 'description')
+    fields = ('title', 'begin', 'end', 'description', 'lists')
+    filter_horizontal = ('lists',)
 
 
 @admin.register(models.Resume)
 class ResumeAdmin(admin.ModelAdmin):
     list_display = ('libel',)
-    fields = ('libel', 'title_resume')
-    filter_horizontal = ('title_resume',)
+    fields = ('libel',)
