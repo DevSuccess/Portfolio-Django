@@ -105,7 +105,8 @@ class Profile(BaseModel, ImageModel):
         return f"{self.firstname} {self.lastname}"
 
 
-class ListFacts(models.Model):
+class FactList(models.Model):
+    count = models.IntegerField(blank=True, null=True)
     phrase_begin = models.CharField(max_length=100)
     phrase_end = models.CharField(max_length=150)
     icons = models.ForeignKey(Icon, on_delete=models.CASCADE, null=True, blank=True)
@@ -114,9 +115,9 @@ class ListFacts(models.Model):
         return f"{self.phrase_begin} {self.phrase_end}"
 
 
-class Facts(BaseModel):
+class Fact(BaseModel):
     libel = models.TextField()
-    lists = models.ManyToManyField(ListFacts)
+    lists = models.ManyToManyField(FactList)
 
     def __str__(self):
         return self.libel

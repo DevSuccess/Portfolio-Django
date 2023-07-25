@@ -25,12 +25,16 @@ def index(request):
     except:
         skills = None
 
+    try:
+        facts = models.Fact.objects.get(active=True)
+    except:
+        facts = None
+
     context = {
         'about': about,
         'profile': profile,
         'contact': contact,
-        'fact_happy': models.Contact.objects.all().count(),
-        'fact_project': models.Web.objects.all().count(),
+        'facts': facts,
         'skills': skills,
     }
     return render(request, 'App/index.html', context)

@@ -85,16 +85,17 @@ class ProfileAdmin(admin.ModelAdmin):
     readonly_fields = ('admin_photo', 'created_at', 'updated_at')
 
 
-@admin.register(models.ListFacts)
+@admin.register(models.FactList)
 class ListFactsAdmin(admin.ModelAdmin):
-    list_display = ('phrase_begin', 'phrase_end', 'icons')
-    fields = ('phrase_begin', 'phrase_end', 'icons')
+    list_display = ('count', 'phrase_begin', 'phrase_end', 'icons')
+    fields = ('count', 'phrase_begin', 'phrase_end', 'icons')
 
 
-@admin.register(models.Facts)
+@admin.register(models.Fact)
 class FactsAdmin(admin.ModelAdmin):
     list_display = ('libel', 'created_at', 'updated_at')
-    fields = ('libel', ('created_at', 'updated_at'))
+    fields = ('libel', 'lists', ('created_at', 'updated_at'))
+    filter_horizontal = ('lists',)
     readonly_fields = ('created_at', 'updated_at')
 
 

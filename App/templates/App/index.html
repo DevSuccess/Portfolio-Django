@@ -122,45 +122,19 @@ Portfolio
         <div class="container">
             <div class="section-title">
                 <h2>Valeurs</h2>
-                <p></p>
+                <p>{{ facts.libel }}</p>
             </div>
             <div class="row no-gutters">
-
-                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up">
-                    <div class="count-box">
-                        <i class="bi bi-emoji-smile"></i>
-                        <span data-purecounter-start="0" data-purecounter-end="{{ fact_happy | default_if_none:0 }}"
-                            data-purecounter-duration="1" class="purecounter"></span>
-                        <p><strong>Satisfaction Clientel</strong> par rapport au porjet </p>
+                {% for fact in facts.lists.all %}
+                    <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="100">
+                        <div class="count-box">
+                            <i class="{{ fact.icons.icon_style }}"></i>
+                            <span data-purecounter-start="0" data-purecounter-end="{{ fact.count}}"
+                                  data-purecounter-duration="1" class="purecounter"></span>
+                            <p><strong>{{ fact.phrase_begin }}</strong> {{ fact.phrase_end }}</p>
+                        </div>
                     </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="100">
-                    <div class="count-box">
-                        <i class="bi bi-journal-richtext"></i>
-                        <span data-purecounter-start="0" data-purecounter-end="{{ fact_project | default_if_none:0 }}"
-                            data-purecounter-duration="1" class="purecounter"></span>
-                        <p><strong>Projets</strong> realisés</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="200">
-                    <div class="count-box">
-                        <i class="bi bi-headset"></i>
-                        <span data-purecounter-start="0" data-purecounter-end="2880" data-purecounter-duration="1"
-                            class="purecounter"></span>
-                        <p><strong>Heurs de Support</strong> après livraison</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="300">
-                    <div class="count-box">
-                        <i class="bi bi-people"></i>
-                        <span data-purecounter-start="0" data-purecounter-end="4" data-purecounter-duration="1"
-                            class="purecounter"></span>
-                        <p><strong>Collaboration</strong> travail avec d'autre développeur</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section><!-- End Facts Section -->
@@ -187,8 +161,6 @@ Portfolio
             </div>
         </div>
     </section>
-
-
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
