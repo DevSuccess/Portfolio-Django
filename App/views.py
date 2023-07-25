@@ -1,20 +1,33 @@
-from itertools import count
-
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from . import models
 
 
 # Create your views here.
 def index(request):
-    profiles = models.Profile.objects.all().first()
-    abouts = models.About.objects.all().first()
-    web = models.Web.objects.filter(type__iexact='Portfolio').first()
-    contact = models.Contact.objects.filter(type__iexact='Contact').first()
-    skills = models.Skill.objects.all().first()
+    try:
+        profile = models.Profile.objects.get(active=True)
+    except:
+        profile = None
+
+    try:
+        about = models.About.objects.get(active=True)
+    except:
+        about = None
+
+    try:
+        contact = models.Contact.objects.get(privilege=True)
+    except:
+        contact = None
+
+    try:
+        skills = models.Skill.objects.get(active=True)
+    except:
+        skills = None
+
     context = {
-        'abouts': abouts,
-        'profiles': profiles,
-        'web': web,
+        'about': about,
+        'profile': profile,
         'contact': contact,
         'fact_happy': models.Contact.objects.all().count(),
         'fact_project': models.Web.objects.all().count(),

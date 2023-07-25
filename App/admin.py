@@ -5,6 +5,12 @@ from . import models
 
 
 # Register your models here.
+@admin.register(models.Icon)
+class IconAdmin(admin.ModelAdmin):
+    list_display = ('name', 'class_or_id', 'icon_style')
+    fields = ('name', 'class_or_id', 'icon_style')
+
+
 @admin.register(models.Localisation)
 class LocalisationAdmin(admin.ModelAdmin):
     list_display = ('lot', 'street', 'city', 'state', 'zip_code', 'admin_map')
@@ -19,8 +25,8 @@ class LocalisationAdmin(admin.ModelAdmin):
 
 @admin.register(models.Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('value', 'type', 'active', 'created_at', 'updated_at')
-    fields = ('value', 'type', 'active', ('created_at', 'updated_at'))
+    list_display = ('value', 'icons', 'active', 'privilege', 'created_at', 'updated_at')
+    fields = ('value', 'icons', ('active', 'privilege'), ('created_at', 'updated_at'))
     readonly_fields = ('created_at', 'updated_at')
 
 
@@ -33,22 +39,22 @@ class DegreeAdmin(admin.ModelAdmin):
 
 @admin.register(models.Email)
 class EmailAdmin(admin.ModelAdmin):
-    list_display = ('value', 'type', 'active', 'created_at', 'updated_at')
-    fields = ('value', 'type', 'active', ('created_at', 'updated_at'))
+    list_display = ('value', 'icons', 'active', 'created_at', 'updated_at')
+    fields = ('value', 'icons', 'active', ('created_at', 'updated_at'))
     readonly_fields = ('created_at', 'updated_at')
 
 
 @admin.register(models.Web)
 class WebAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url', 'type', 'active', 'created_at', 'updated_at')
-    fields = ('title', 'url', 'type', 'active', ('created_at', 'updated_at'))
+    list_display = ('title', 'url', 'icons', 'active', 'privilege', 'created_at', 'updated_at')
+    fields = ('title', 'url', 'icons', ('active', 'privilege'), ('created_at', 'updated_at'))
     readonly_fields = ('created_at', 'updated_at')
 
 
 @admin.register(models.Social)
 class SocialAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url', 'type', 'active', 'created_at', 'updated_at')
-    fields = ('title', 'url', 'type', 'active', ('created_at', 'updated_at'))
+    list_display = ('title', 'url', 'icons', 'active', 'created_at', 'updated_at')
+    fields = ('title', 'url', 'icons', 'active', ('created_at', 'updated_at'))
     readonly_fields = ('created_at', 'updated_at')
 
 
@@ -61,7 +67,7 @@ class AboutAdmin(admin.ModelAdmin):
 @admin.register(models.Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('firstname', 'lastname', 'pseudo', 'birthday', 'admin_photo')
-    filter_horizontal = ('degrees', 'contacts', 'emails', 'socials', 'webs')
+    filter_horizontal = ('degrees', 'socials')
     fieldsets = (
         ('Personal', {
             'fields': ('firstname', 'lastname', 'pseudo', 'birthday', 'localisation')
@@ -70,13 +76,19 @@ class ProfileAdmin(admin.ModelAdmin):
             'fields': ('image', 'degrees')
         }),
         ('Contacts and Emails', {
-            'fields': ('contacts', 'emails')
+            'fields': ('contact', 'email')
         }),
         ('Socials and Web', {
-            'fields': ('socials', 'webs')
+            'fields': ('socials', 'web')
         })
     )
     readonly_fields = ('admin_photo', 'created_at', 'updated_at')
+
+
+@admin.register(models.ListFacts)
+class ListFactsAdmin(admin.ModelAdmin):
+    list_display = ('phrase_begin', 'phrase_end', 'icons')
+    fields = ('phrase_begin', 'phrase_end', 'icons')
 
 
 @admin.register(models.Facts)
@@ -106,4 +118,3 @@ class SkillAdmin(admin.ModelAdmin):
         })
     )
     readonly_fields = ('created_at', 'updated_at')
-
