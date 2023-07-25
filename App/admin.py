@@ -119,3 +119,30 @@ class SkillAdmin(admin.ModelAdmin):
         })
     )
     readonly_fields = ('created_at', 'updated_at')
+
+
+@admin.register(models.DetailListResume)
+class DetailListResumeAdmin(admin.ModelAdmin):
+    list_display = ('value',)
+    fields = ('value',)
+
+
+@admin.register(models.TitleResume)
+class TitleResumeAdmin(admin.ModelAdmin):
+    list_display = ('libel',)
+    fields = ('libel', 'resumes_list')
+    filter_horizontal = ('resumes_list',)
+
+
+@admin.register(models.ResumeList)
+class ResumeListAdmin(admin.ModelAdmin):
+    list_display = ('title', 'begin', 'end', 'libel')
+    fields = ('title', 'begin', 'end', 'libel', 'details')
+    filter_horizontal = ('details',)
+
+
+@admin.register(models.Resume)
+class ResumeAdmin(admin.ModelAdmin):
+    list_display = ('libel',)
+    fields = ('libel', 'title_resume')
+    filter_horizontal = ('title_resume',)
