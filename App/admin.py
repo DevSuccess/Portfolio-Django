@@ -58,8 +58,8 @@ class SocialAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'updated_at')
 
 
-@admin.register(models.About)
-class AboutAdmin(admin.ModelAdmin):
+@admin.register(models.Introduction)
+class IntroductionAdmin(admin.ModelAdmin):
     list_display = ('title', 'introduction')
     fields = ('title', 'introduction', 'description')
 
@@ -85,18 +85,10 @@ class ProfileAdmin(admin.ModelAdmin):
     readonly_fields = ('admin_photo', 'created_at', 'updated_at')
 
 
-@admin.register(models.FactList)
-class ListFactsAdmin(admin.ModelAdmin):
+@admin.register(models.Fact)
+class FactAdmin(admin.ModelAdmin):
     list_display = ('count', 'phrase_begin', 'phrase_end', 'icons')
     fields = ('count', 'phrase_begin', 'phrase_end', 'icons')
-
-
-@admin.register(models.Fact)
-class FactsAdmin(admin.ModelAdmin):
-    list_display = ('libel', 'created_at', 'updated_at')
-    fields = ('libel', 'lists', ('created_at', 'updated_at'))
-    filter_horizontal = ('lists',)
-    readonly_fields = ('created_at', 'updated_at')
 
 
 @admin.register(models.Competence)
@@ -147,7 +139,50 @@ class ExperienceAdmin(admin.ModelAdmin):
     filter_horizontal = ('lists',)
 
 
-@admin.register(models.Resume)
-class ResumeAdmin(admin.ModelAdmin):
-    list_display = ('libel', 'active')
-    fields = ('libel', 'active')
+@admin.register(models.SectionType)
+class SectionTypeAdmin(admin.ModelAdmin):
+    list_display = ('value', 'active', 'icons')
+    fields = ('value', 'active', 'icons')
+
+
+@admin.register(models.Section)
+class SectionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'type', 'active', 'created_at', 'updated_at')
+    fields = ('title', 'type', 'active', ('created_at', 'updated_at'))
+    readonly_fields = ('created_at', 'updated_at')
+
+
+@admin.register(models.ImagePortfolio)
+class ImagePortfolioAdmin(admin.ModelAdmin):
+    list_display = ('name', 'admin_photo')
+    fields = ('name', 'admin_photo', 'image')
+    readonly_fields = ('admin_photo',)
+
+
+@admin.register(models.CategoryPortfolio)
+class CategoryPortfolioAdmin(admin.ModelAdmin):
+    list_display = ('name', 'value')
+    fields = ('name', 'value')
+
+
+@admin.register(models.ClientPortfolio)
+class ClientPortfolioAdmin(admin.ModelAdmin):
+    list_display = ('name', 'contact')
+    fields = ('name', 'contact')
+
+
+@admin.register(models.Portfolio)
+class PortfolioAdmin(admin.ModelAdmin):
+    list_display = ('name', 'url', 'begin', 'end')
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'url', 'begin', 'end', 'active')
+        }),
+        ('Details', {
+            'fields': ('details', 'category', 'client')
+        }),
+        ('Images', {
+            "fields": ('images', )
+        })
+    )
+    filter_horizontal = ('images',)

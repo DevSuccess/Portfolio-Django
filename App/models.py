@@ -80,7 +80,7 @@ class Social(BaseModel):
         return self.title
 
 
-class About(BaseModel):
+class Introduction(BaseModel):
     title = models.CharField(max_length=150)
     introduction = models.TextField(max_length=250)
     description = models.TextField()
@@ -105,22 +105,14 @@ class Profile(BaseModel, ImageModel):
         return f"{self.firstname} {self.lastname}"
 
 
-class FactList(models.Model):
+class Fact(models.Model):
     count = models.IntegerField(blank=True, null=True)
-    phrase_begin = models.CharField(max_length=100)
-    phrase_end = models.CharField(max_length=150)
+    phrase_begin = models.CharField(max_length=100, null=True)
+    phrase_end = models.CharField(max_length=150, null=True)
     icons = models.ForeignKey(Icon, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f"{self.phrase_begin} {self.phrase_end}"
-
-
-class Fact(BaseModel):
-    libel = models.TextField()
-    lists = models.ManyToManyField(FactList)
-
-    def __str__(self):
-        return self.libel
 
 
 class Competence(ImageModel):
@@ -165,7 +157,7 @@ class Education(models.Model):
         return self.title
 
 
-class Experience (models.Model):
+class Experience(models.Model):
     title = models.CharField(max_length=150)
     begin = models.CharField(max_length=100, null=True, blank=True)
     end = models.CharField(max_length=100, null=True, blank=True)
@@ -185,8 +177,55 @@ class Summary(models.Model):
         return self.title
 
 
-class Resume(BaseModel):
+class SectionType(BaseModel):
+    value = models.CharField(unique=True, max_length=50)
+    icons = models.ForeignKey(Icon, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.value
+
+
+class Section(BaseModel):
+    title = models.CharField(unique=True, max_length=150)
+    type = models.ForeignKey(SectionType, on_delete=models.CASCADE)
     libel = models.TextField()
 
     def __str__(self):
-        return self.libel
+        return self.title
+
+
+class ImagePortfolio(ImageModel):
+    name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
+
+
+class CategoryPortfolio(BaseModel):
+    name = models.CharField(max_length=150)
+    value = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class ClientPortfolio(ImageModel):
+    name = models.CharField(unique=True, max_length=150)
+    contact = models.ForeignKey(Contact, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Portfolio(BaseModel):
+    name = models.CharField(max_length=150)
+    url = models.URLField(blank=True)
+    details = models.TextField()
+    begin = models.DateField()
+    end = models.DateField(blank=True)
+    category = models.ForeignKey(CategoryPortfolio, on_delete=models.CASCADE)
+    client = models.ForeignKey(ClientPortfolio, on_delete=models.CASCADE)
+    images = models.ManyToManyField(ImagePortfolio)
+
+    def __str__(self):
+        return self.name

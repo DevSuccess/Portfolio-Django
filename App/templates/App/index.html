@@ -17,7 +17,8 @@ Portfolio
             </h1>
             <div class="social-links mt-3 text-center">
                 {% for social in profile.socials.all %}
-                    <a href="{{ social.url }}" class="{{ social.icons.class_or_id }}"><i class="{{ social.icons.icon_style }}"></i></a>
+                <a href="{{ social.url }}" class="{{ social.icons.class_or_id }}"><i
+                        class="{{ social.icons.icon_style }}"></i></a>
                 {% endfor %}
             </div>
         </div>
@@ -53,12 +54,12 @@ Portfolio
 
 <main id="main">
     <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+    <section id="{{ about_section.type.value }}" class="about">
         <div class="container">
             <div class="section-title">
-                <h2>A Propos</h2>
+                <h2>{{ about_section.title }}</h2>
                 <p>
-                    {{ about.introduction }}
+                    {{ about_section.libel }}
                 </p>
             </div>
             <div class="row">
@@ -118,32 +119,32 @@ Portfolio
         </div>
     </section><!-- End About Section -->
 
-    <section id="facts" class="facts">
+    <section id="{{ facts_section.type.value }}" class="facts">
         <div class="container">
             <div class="section-title">
-                <h2>Valeurs</h2>
-                <p>{{ facts.libel }}</p>
+                <h2>{{ facts_section.title }}</h2>
+                <p>{{ facts_section.libel }}</p>
             </div>
             <div class="row no-gutters">
-                {% for fact in facts.lists.all %}
-                    <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="100">
-                        <div class="count-box">
-                            <i class="{{ fact.icons.icon_style }}"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="{{ fact.count}}"
-                                  data-purecounter-duration="1" class="purecounter"></span>
-                            <p><strong>{{ fact.phrase_begin }}</strong> {{ fact.phrase_end }}</p>
-                        </div>
+                {% for fact in facts %}
+                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="100">
+                    <div class="count-box">
+                        <i class="{{ fact.icons.icon_style }}"></i>
+                        <span data-purecounter-start="0" data-purecounter-end="{{ fact.count}}"
+                            data-purecounter-duration="1" class="purecounter"></span>
+                        <p><strong>{{ fact.phrase_begin }}</strong> {{ fact.phrase_end }}</p>
                     </div>
+                </div>
                 {% endfor %}
             </div>
         </div>
     </section><!-- End Facts Section -->
     <!-- ======= Skills Section ======= -->
-    <section id="skills" class="skills section-bg">
+    <section id="{{ skills_section.type.value }}" class="skills section-bg">
         <div class="container">
             <div class="section-title">
-                <h2>Compétences</h2>
-                <p>{{ skills.libel }}</p>
+                <h2>{{ skills_section.title }}</h2>
+                <p>{{ skills_section.libel }}</p>
             </div>
             <div class="row skills-content">
                 {% for skill in skills.competences.all %}
@@ -163,58 +164,94 @@ Portfolio
     </section><!-- End Skills Section -->
 
     <!-- ======= Resume Section ======= -->
-    <div id="resume" class="resume">
+    <section id="{{ resume_section.type.value }}" class="resume">
         <div class="container">
             <div class="section-title">
-                <h2>Résumée</h2>
-                <p>{{ resume.libel }}</p>
+                <h2>{{ resume_section.title }}</h2>
+                <p>{{ resume_section.libel }}</p>
             </div>
 
             <div class="row">
                 <div class="col-lg-6" data-aos="fade-up">
                     <h3 class="resume-title">Sommaire</h3>
                     {% for sommary in sommaries %}
-                        <div class="resume-item pb-0">
-                            <h4>{{ sommary.title }}</h4>
-                            <p><em>
+                    <div class="resume-item pb-0">
+                        <h4>{{ sommary.title }}</h4>
+                        <p><em>
                                 {{ sommary.details }}
                             </em></p>
-                            <ul>
-                                {% for list in sommary.lists.all %}
-                                    <li>{{ list.value }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                        <ul>
+                            {% for list in sommary.lists.all %}
+                            <li>{{ list.value }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                     {% endfor %}
 
                     <h3 class="resume-title">Education</h3>
                     {% for education in educations %}
-                        <div class="resume-item">
-                            <h4>{{ education.title }}</h4>
-                            <h5>{{ education.begin }} - {{ education.end }}</h5>
-                            <p><em>{{ education.description }}</em></p>
-                            <p>{{ education.details }}</p>
-                        </div>
+                    <div class="resume-item">
+                        <h4>{{ education.title }}</h4>
+                        <h5>{{ education.begin }} - {{ education.end }}</h5>
+                        <p><em>{{ education.description }}</em></p>
+                        <p>{{ education.details }}</p>
+                    </div>
                     {% endfor %}
                 </div>
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                <h3 class="resume-title">Expérience Professionel</h3>
-                {% for experience in experiences %}
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="resume-title">Expérience Professionel</h3>
+                    {% for experience in experiences %}
                     <div class="resume-item">
                         <h4>{{ experience.title }}</h4>
-                        <h5>{{ experience.begin }} {{ experience.end }}</h5>
+                        <h5>{{ experience.begin }} - {{ experience.end }}</h5>
                         <p><em>{{ experience.description }}</em></p>
                         <ul>
                             {% for exp in experience.lists.all %}
-                                <li>{{ exp.value }}</li>
+                            <li>{{ exp.value }}</li>
                             {% endfor %}
                         </ul>
                     </div>
-                {% endfor %}
-            </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <section id="{{ portfolio_section.type.value }}" class="{{ portfolio_section.type.value }} section-bg">
+        <div class="container">
+            <div class="section-title">
+                <h2>{{ portfolio_section.title }}</h2>
+                <p>{{ portfolio_section.libel }}</p>
+            </div>
+            <div class="row" data-aos="fade-up">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <ul id="{{ portfolio_section.type.value }}-flters">
+                        <li data-filter="*" class="filter-active">Tout</li>
+                        {% for category in categories %}
+                        <li data-filter=".filter-{{ category.value }}">{{ category.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+                {% for portfolio in portfolios %}
+                <div class="col-lg-4 col-md-6 portfolio-item filter-{{ portfolio.category.value }}">
+                    <div class="portfolio-wrap">
+                        <img src="{{ portfolio.images.all.image}}" alt="{{ portfolio.images.first }}">
+                        <div class="portfolio-links">
+                            <a href="{{ portfolio.images.all.first }}" data-gallery="portfolioGallery"
+                                class="portfolio-lightbox" title="{{ portfolio.images.name }}">
+                                <i class="bx bx-plus"></i>
+                            </a>
+                            <a href="#" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
